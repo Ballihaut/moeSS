@@ -344,7 +344,7 @@ class CI_Zip {
 	public function read_dir($path, $preserve_filepath = TRUE, $root_path = NULL)
 	{
 		$path = rtrim($path, '/\\').DIRECTORY_SEPARATOR;
-		if ( ! $fp = @opendir($path))
+		if ( ! $fp = opendir($path))
 		{
 			return FALSE;
 		}

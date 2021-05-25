@@ -464,7 +464,7 @@ class CI_Output {
 		{
 			foreach ($this->headers as $header)
 			{
-				@header($header[0], $header[1]);
+				header($header[0], $header[1]);
 			}
 		}
 
@@ -622,7 +622,7 @@ class CI_Output {
 		}
 		else
 		{
-			@unlink($cache_path);
+			unlink($cache_path);
 			log_message('error', 'Unable to write the complete cache content at: '.$cache_path);
 		}
 	}
@@ -680,7 +680,7 @@ class CI_Output {
 		if ($_SERVER['REQUEST_TIME'] >= $expire && is_really_writable($cache_path))
 		{
 			// If so we'll delete it.
-			@unlink($filepath);
+			unlink($filepath);
 			log_message('debug', 'Cache file has expired. File deleted.');
 			return FALSE;
 		}
@@ -737,7 +737,7 @@ class CI_Output {
 
 		$cache_path .= md5($CI->config->item('base_url').$CI->config->item('index_page').$uri);
 
-		if ( ! @unlink($cache_path))
+		if ( ! unlink($cache_path))
 		{
 			log_message('error', 'Unable to delete cache file for '.$uri);
 			return FALSE;

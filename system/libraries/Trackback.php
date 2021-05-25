@@ -208,7 +208,7 @@ class CI_Trackback {
 				}
 				elseif (ICONV_ENABLED === TRUE)
 				{
-					$_POST[$val] = @iconv($this->data['charset'], $this->charset.'//IGNORE', $_POST[$val]);
+					$_POST[$val] = iconv($this->data['charset'], $this->charset.'//IGNORE', $_POST[$val]);
 				}
 			}
 
@@ -287,7 +287,7 @@ class CI_Trackback {
 		$target = parse_url($url);
 
 		// Open the socket
-		if ( ! $fp = @fsockopen($target['host'], 80))
+		if ( ! $fp = fsockopen($target['host'], 80))
 		{
 			$this->set_error('Invalid Connection: '.$url);
 			return FALSE;
@@ -318,7 +318,7 @@ class CI_Trackback {
 		{
 			$this->response .= fgets($fp, 128);
 		}
-		@fclose($fp);
+		fclose($fp);
 
 		if (stripos($this->response, '<error>0</error>') === FALSE)
 		{

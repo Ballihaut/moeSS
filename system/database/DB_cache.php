@@ -143,7 +143,7 @@ class CI_DB_Cache {
 		$segment_two = ($this->CI->uri->segment(2) == FALSE) ? 'index' : $this->CI->uri->segment(2);
 		$filepath = $this->db->cachedir.$segment_one.'+'.$segment_two.'/'.md5($sql);
 
-		if (FALSE === ($cachedata = @file_get_contents($filepath)))
+		if (FALSE === ($cachedata = file_get_contents($filepath)))
 		{
 			return FALSE;
 		}
@@ -167,7 +167,7 @@ class CI_DB_Cache {
 		$dir_path = $this->db->cachedir.$segment_one.'+'.$segment_two.'/';
 		$filename = md5($sql);
 
-		if ( ! is_dir($dir_path) && ! @mkdir($dir_path, 0750))
+		if ( ! is_dir($dir_path) && ! mkdir($dir_path, 0750))
 		{
 			return FALSE;
 		}

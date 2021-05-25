@@ -1,5 +1,5 @@
 <?php
-/**
+$this->load->/**
  * Created by PhpStorm.
  * User: John
  * Date: 1/24/15
@@ -36,7 +36,7 @@
  * @filesource
  */
 
-$this->load->helper('comm');
+helper('comm');
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!-- Right side column. Contains the navbar and content of the page -->
 <aside class="right-side">

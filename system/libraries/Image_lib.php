@@ -750,7 +750,7 @@ class CI_Image_lib {
 		// we'll simply make a copy of the original with the new name... assuming dynamic rendering is off.
 		if ($this->dynamic_output === FALSE && $this->orig_width === $this->width && $this->orig_height === $this->height)
 		{
-			if ($this->source_image !== $this->new_image && @copy($this->full_src_path, $this->full_dst_path))
+			if ($this->source_image !== $this->new_image && copy($this->full_src_path, $this->full_dst_path))
 			{
 				chmod($this->full_dst_path, $this->file_permissions);
 			}
@@ -887,7 +887,7 @@ class CI_Image_lib {
 		// exec() might be disabled
 		if (function_usable('exec'))
 		{
-			@exec($cmd, $output, $retval);
+			exec($cmd, $output, $retval);
 		}
 
 		// Did it work?
@@ -970,7 +970,7 @@ class CI_Image_lib {
 		// exec() might be disabled
 		if (function_usable('exec'))
 		{
-			@exec($cmd, $output, $retval);
+			exec($cmd, $output, $retval);
 		}
 
 		// Did it work?
@@ -1192,7 +1192,7 @@ class CI_Image_lib {
 		//  Build the finalized image
 		if ($wm_img_type === 3 && function_exists('imagealphablending'))
 		{
-			@imagealphablending($src_img, TRUE);
+			imagealphablending($src_img, TRUE);
 		}
 
 		// Set RGB values for text and shadow
@@ -1467,7 +1467,7 @@ class CI_Image_lib {
 					return FALSE;
 				}
 
-				if ( ! @imagegif($resource, $this->full_dst_path))
+				if ( ! imagegif($resource, $this->full_dst_path))
 				{
 					$this->set_error('imglib_save_failed');
 					return FALSE;
@@ -1480,7 +1480,7 @@ class CI_Image_lib {
 					return FALSE;
 				}
 
-				if ( ! @imagejpeg($resource, $this->full_dst_path, $this->quality))
+				if ( ! imagejpeg($resource, $this->full_dst_path, $this->quality))
 				{
 					$this->set_error('imglib_save_failed');
 					return FALSE;
@@ -1493,7 +1493,7 @@ class CI_Image_lib {
 					return FALSE;
 				}
 
-				if ( ! @imagepng($resource, $this->full_dst_path))
+				if ( ! imagepng($resource, $this->full_dst_path))
 				{
 					$this->set_error('imglib_save_failed');
 					return FALSE;
@@ -1732,7 +1732,7 @@ class CI_Image_lib {
 			/* As it is stated in the PHP manual, dl() is not always available
 			 * and even if so - it could generate an E_WARNING message on failure
 			 */
-			return (function_exists('dl') && @dl('gd.so'));
+			return (function_exists('dl') && dl('gd.so'));
 		}
 
 		return TRUE;
@@ -1749,7 +1749,7 @@ class CI_Image_lib {
 	{
 		if (function_exists('gd_info'))
 		{
-			$gd_version = @gd_info();
+			$gd_version = gd_info();
 			return preg_replace('/\D/', '', $gd_version['GD Version']);
 		}
 

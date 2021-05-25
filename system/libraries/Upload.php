@@ -563,9 +563,9 @@ class CI_Upload {
 		 * we'll use move_uploaded_file(). One of the two should
 		 * reliably work in most environments
 		 */
-		if ( ! @copy($this->file_temp, $this->upload_path.$this->file_name))
+		if ( ! copy($this->file_temp, $this->upload_path.$this->file_name))
 		{
-			if ( ! @move_uploaded_file($this->file_temp, $this->upload_path.$this->file_name))
+			if ( ! move_uploaded_file($this->file_temp, $this->upload_path.$this->file_name))
 			{
 				$this->set_error('upload_destination_error');
 				return FALSE;
@@ -798,7 +798,7 @@ class CI_Upload {
 	{
 		if ($this->is_image() && function_exists('getimagesize'))
 		{
-			if (FALSE !== ($D = @getimagesize($path)))
+			if (FALSE !== ($D = getimagesize($path)))
 			{
 				$types = array(1 => 'gif', 2 => 'jpeg', 3 => 'png');
 
@@ -887,7 +887,7 @@ class CI_Upload {
 		}
 
 		// Images get some additional checks
-		if (in_array($ext, array('gif', 'jpg', 'jpeg', 'jpe', 'png'), TRUE) && @getimagesize($this->file_temp) === FALSE)
+		if (in_array($ext, array('gif', 'jpg', 'jpeg', 'jpe', 'png'), TRUE) && getimagesize($this->file_temp) === FALSE)
 		{
 			return FALSE;
 		}
@@ -935,7 +935,7 @@ class CI_Upload {
 
 		if (function_exists('getimagesize'))
 		{
-			$D = @getimagesize($this->file_temp);
+			$D = getimagesize($this->file_temp);
 
 			if ($this->max_width > 0 && $D[0] > $this->max_width)
 			{
@@ -1087,7 +1087,7 @@ class CI_Upload {
 		// processor power and time if it is actually a clean image, as it will be in nearly all instances _except_ an
 		// attempted XSS attack.
 
-		if (function_exists('getimagesize') && @getimagesize($file) !== FALSE)
+		if (function_exists('getimagesize') && getimagesize($file) !== FALSE)
 		{
 			if (($file = @fopen($file, 'rb')) === FALSE) // "b" to force binary
 			{
@@ -1105,7 +1105,7 @@ class CI_Upload {
 			return ! preg_match('/<(a|body|head|html|img|plaintext|pre|script|table|title)[\s>]/i', $opening_bytes);
 		}
 
-		if (($data = @file_get_contents($file)) === FALSE)
+		if (($data = file_get_contents($file)) === FALSE)
 		{
 			return FALSE;
 		}
@@ -1199,10 +1199,10 @@ class CI_Upload {
 		 */
 		if (function_exists('finfo_file'))
 		{
-			$finfo = @finfo_open(FILEINFO_MIME);
+			$finfo = finfo_open(FILEINFO_MIME);
 			if (is_resource($finfo)) // It is possible that a FALSE value is returned, if there is no magic MIME database file found on the system
 			{
-				$mime = @finfo_file($finfo, $file['tmp_name']);
+				$mime = finfo_file($finfo, $file['tmp_name']);
 				finfo_close($finfo);
 
 				/* According to the comments section of the PHP manual page,
@@ -1241,7 +1241,7 @@ class CI_Upload {
 				 * anything that could already be set for $mime previously. This effectively makes the second parameter a dummy
 				 * value, which is only put to allow us to get the return status code.
 				 */
-				$mime = @exec($cmd, $mime, $return_status);
+				$mime = exec($cmd, $mime, $return_status);
 				if ($return_status === 0 && is_string($mime) && preg_match($regexp, $mime, $matches))
 				{
 					$this->file_type = $matches[1];
@@ -1251,7 +1251,7 @@ class CI_Upload {
 
 			if ( ! ini_get('safe_mode') && function_usable('shell_exec'))
 			{
-				$mime = @shell_exec($cmd);
+				$mime = shell_exec($cmd);
 				if (strlen($mime) > 0)
 				{
 					$mime = explode("\n", trim($mime));
@@ -1265,11 +1265,11 @@ class CI_Upload {
 
 			if (function_usable('popen'))
 			{
-				$proc = @popen($cmd, 'r');
+				$proc = popen($cmd, 'r');
 				if (is_resource($proc))
 				{
-					$mime = @fread($proc, 512);
-					@pclose($proc);
+					$mime = fread($proc, 512);
+					pclose($proc);
 					if ($mime !== FALSE)
 					{
 						$mime = explode("\n", trim($mime));
@@ -1286,7 +1286,7 @@ class CI_Upload {
 		// Fall back to the deprecated mime_content_type(), if available (still better than $_FILES[$field]['type'])
 		if (function_exists('mime_content_type'))
 		{
-			$this->file_type = @mime_content_type($file['tmp_name']);
+			$this->file_type = mime_content_type($file['tmp_name']);
 			if (strlen($this->file_type) > 0) // It's possible that mime_content_type() returns FALSE or an empty string
 			{
 				return;

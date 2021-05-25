@@ -712,7 +712,7 @@ class XML_RPC_Client extends CI_Xmlrpc
 			$port = $this->proxy_port;
 		}
 
-		$fp = @fsockopen($server, $port, $this->errno, $this->errstring, $this->timeout);
+		$fp = fsockopen($server, $port, $this->errno, $this->errstring, $this->timeout);
 
 		if ( ! is_resource($fp))
 		{

@@ -108,7 +108,7 @@ class CI_DB_sqlite3_forge extends CI_DB_forge {
 		{
 			// We need to close the pseudo-connection first
 			$this->db->close();
-			if ( ! @unlink($this->db->database))
+			if ( ! unlink($this->db->database))
 			{
 				return $this->db->db_debug ? $this->db->display_error('db_unable_to_drop') : FALSE;
 			}

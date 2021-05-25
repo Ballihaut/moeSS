@@ -51,14 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link		http://codeigniter.com/user_guide/database/
  */
 
-/**
- * oci8 Database Adapter Class
- *
- * This is a modification of the DB_driver class to
- * permit access to oracle databases
- *
- * @author	  Kelly McArdle
- */
 class CI_DB_oci8_driver extends CI_DB {
 
 	/**

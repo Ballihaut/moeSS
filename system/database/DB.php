@@ -107,7 +107,7 @@ function &DB($params = '', $query_builder_override = NULL)
 		 * parameter. DSNs must have this prototype:
 		 * $dsn = 'driver://username:password@hostname/database';
 		 */
-		if (($dsn = @parse_url($params)) === FALSE)
+		if (($dsn = parse_url($params)) === FALSE)
 		{
 			show_error('Invalid DB Connection String');
 		}

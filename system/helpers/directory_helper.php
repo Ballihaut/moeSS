@@ -66,7 +66,7 @@ if ( ! function_exists('directory_map'))
 	 */
 	function directory_map($source_dir, $directory_depth = 0, $hidden = FALSE)
 	{
-		if ($fp = @opendir($source_dir))
+		if ($fp = opendir($source_dir))
 		{
 			$filedata	= array();
 			$new_depth	= $directory_depth - 1;

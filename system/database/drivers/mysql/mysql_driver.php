@@ -491,7 +491,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		// Error suppression to avoid annoying E_WARNINGs in cases
 		// where the connection has already been closed for some reason.
-		@mysql_close($this->conn_id);
+		mysql_close($this->conn_id);
 	}
 
 }

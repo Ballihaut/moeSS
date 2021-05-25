@@ -63,7 +63,7 @@ if ( ! function_exists('read_file'))
 	 */
 	function read_file($file)
 	{
-		return @file_get_contents($file);
+		return file_get_contents($file);
 	}
 }
 
@@ -129,12 +129,12 @@ if ( ! function_exists('delete_files'))
 		// Trim the trailing slash
 		$path = rtrim($path, '/\\');
 
-		if ( ! $current_dir = @opendir($path))
+		if ( ! $current_dir = opendir($path))
 		{
 			return FALSE;
 		}
 
-		while (FALSE !== ($filename = @readdir($current_dir)))
+		while (FALSE !== ($filename = readdir($current_dir)))
 		{
 			if ($filename !== '.' && $filename !== '..')
 			{
@@ -144,7 +144,7 @@ if ( ! function_exists('delete_files'))
 				}
 				elseif ($htdocs !== TRUE OR ! preg_match('/^(\.htaccess|index\.(html|htm|php)|web\.config)$/i', $filename))
 				{
-					@unlink($path.DIRECTORY_SEPARATOR.$filename);
+					unlink($path.DIRECTORY_SEPARATOR.$filename);
 				}
 			}
 		}
@@ -152,7 +152,7 @@ if ( ! function_exists('delete_files'))
 		closedir($current_dir);
 
 		return ($del_dir === TRUE && $_level > 0)
-			? @rmdir($path)
+			? rmdir($path)
 			: TRUE;
 	}
 }
@@ -176,7 +176,7 @@ if ( ! function_exists('get_filenames'))
 	{
 		static $_filedata = array();
 
-		if ($fp = @opendir($source_dir))
+		if ($fp = opendir($source_dir))
 		{
 			// reset the array and make sure $source_dir has a trailing slash on the initial call
 			if ($_recursion === FALSE)
@@ -227,7 +227,7 @@ if ( ! function_exists('get_dir_file_info'))
 		static $_filedata = array();
 		$relative_path = $source_dir;
 
-		if ($fp = @opendir($source_dir))
+		if ($fp = opendir($source_dir))
 		{
 			// reset the array and make sure $source_dir has a trailing slash on the initial call
 			if ($_recursion === FALSE)

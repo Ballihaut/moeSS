@@ -107,16 +107,16 @@ if ( ! function_exists('create_captcha'))
 
 		$now = microtime(TRUE);
 
-		$current_dir = @opendir($img_path);
-		while ($filename = @readdir($current_dir))
+		$current_dir = opendir($img_path);
+		while ($filename = readdir($current_dir))
 		{
 			if (substr($filename, -4) === '.jpg' && (str_replace('.jpg', '', $filename) + $expiration) < $now)
 			{
-				@unlink($img_path.$filename);
+				unlink($img_path.$filename);
 			}
 		}
 
-		@closedir($current_dir);
+		closedir($current_dir);
 
 		// -----------------------------------
 		// Do we have a "word" yet?

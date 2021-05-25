@@ -99,7 +99,7 @@ class CI_DB_sqlsrv_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return @sqlsrv_num_fields($this->result_id);
+		return sqlsrv_num_fields($this->result_id);
 	}
 
 	// --------------------------------------------------------------------

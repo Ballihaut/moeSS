@@ -108,8 +108,8 @@ if ( ! function_exists('is_really_writable'))
 			}
 
 			fclose($fp);
-			@chmod($file, 0777);
-			@unlink($file);
+			chmod($file, 0777);
+			unlink($file);
 			return TRUE;
 		}
 		elseif ( ! is_file($file) OR ($fp = @fopen($file, 'ab')) === FALSE)

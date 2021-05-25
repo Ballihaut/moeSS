@@ -97,7 +97,7 @@ class CI_Utf8 {
 			}
 			elseif (ICONV_ENABLED)
 			{
-				$str = @iconv('UTF-8', 'UTF-8//IGNORE', $str);
+				$str = iconv('UTF-8', 'UTF-8//IGNORE', $str);
 			}
 		}
 
@@ -140,7 +140,7 @@ class CI_Utf8 {
 		}
 		elseif (ICONV_ENABLED)
 		{
-			return @iconv($encoding, 'UTF-8', $str);
+			return iconv($encoding, 'UTF-8', $str);
 		}
 
 		return FALSE;

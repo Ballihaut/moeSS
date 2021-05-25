@@ -135,7 +135,7 @@ class CI_URI {
 			}
 			else
 			{
-				$uri = isset($_SERVER[$protocol]) ? $_SERVER[$protocol] : @getenv($protocol);
+				$uri = isset($_SERVER[$protocol]) ? $_SERVER[$protocol] : getenv($protocol);
 				$this->_set_uri_string($uri);
 			}
 		}
@@ -252,7 +252,7 @@ class CI_URI {
 	 */
 	protected function _parse_query_string()
 	{
-		$uri = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : @getenv('QUERY_STRING');
+		$uri = isset($_SERVER['QUERY_STRING']) ? $_SERVER['QUERY_STRING'] : getenv('QUERY_STRING');
 
 		if (trim($uri, '/') === '')
 		{

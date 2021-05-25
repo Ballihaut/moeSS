@@ -439,7 +439,7 @@ class CI_Session_cookie extends CI_Session_driver {
 		}
 
 		// Unserialize the session array
-		$session = @unserialize($session);
+		$session = unserialize($session);
 
 		// Is the session data we unserialized an array with the correct format?
 		if ( ! is_array($session) OR ! isset($session['session_id'], $session['ip_address'], $session['user_agent'], $session['last_activity']))

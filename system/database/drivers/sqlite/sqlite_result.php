@@ -57,7 +57,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	{
 		return is_int($this->num_rows)
 			? $this->num_rows
-			: $this->num_rows = @sqlite_num_rows($this->result_id);
+			: $this->num_rows = sqlite_num_rows($this->result_id);
 	}
 
 	// --------------------------------------------------------------------
@@ -69,7 +69,7 @@ class CI_DB_sqlite_result extends CI_DB_result {
 	 */
 	public function num_fields()
 	{
-		return @sqlite_num_fields($this->result_id);
+		return sqlite_num_fields($this->result_id);
 	}
 
 	// --------------------------------------------------------------------

@@ -69,7 +69,7 @@ if ( ! function_exists('force_download'))
 		}
 		elseif ($data === NULL)
 		{
-			if (@is_file($filename) && ($filesize = @filesize($filename)) !== FALSE)
+			if (is_file($filename) && ($filesize = filesize($filename)) !== FALSE)
 			{
 				$filepath = $filename;
 				$filename = explode('/', str_replace(DIRECTORY_SEPARATOR, '/', $filename));
@@ -129,9 +129,9 @@ if ( ! function_exists('force_download'))
 		}
 
 		// Clean output buffer
-		if (ob_get_level() !== 0 && @ob_end_clean() === FALSE)
+		if (ob_get_level() !== 0 && ob_end_clean() === FALSE)
 		{
-			@ob_clean();
+			ob_clean();
 		}
 
 		// Generate the server headers

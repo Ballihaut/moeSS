@@ -152,7 +152,7 @@ class CI_FTP {
 			$this->initialize($config);
 		}
 
-		if (FALSE === ($this->conn_id = @ftp_connect($this->hostname, $this->port)))
+		if (FALSE === ($this->conn_id = ftp_connect($this->hostname, $this->port)))
 		{
 			if ($this->debug === TRUE)
 			{
@@ -190,7 +190,7 @@ class CI_FTP {
 	 */
 	protected function _login()
 	{
-		return @ftp_login($this->conn_id, $this->username, $this->password);
+		return ftp_login($this->conn_id, $this->username, $this->password);
 	}
 
 	// --------------------------------------------------------------------
@@ -237,7 +237,7 @@ class CI_FTP {
 			return FALSE;
 		}
 
-		$result = @ftp_chdir($this->conn_id, $path);
+		$result = ftp_chdir($this->conn_id, $path);
 
 		if ($result === FALSE)
 		{
@@ -268,7 +268,7 @@ class CI_FTP {
 			return FALSE;
 		}
 
-		$result = @ftp_mkdir($this->conn_id, $path);
+		$result = ftp_mkdir($this->conn_id, $path);
 
 		if ($result === FALSE)
 		{
@@ -323,7 +323,7 @@ class CI_FTP {
 
 		$mode = ($mode === 'ascii') ? FTP_ASCII : FTP_BINARY;
 
-		$result = @ftp_put($this->conn_id, $rempath, $locpath, $mode);
+		$result = ftp_put($this->conn_id, $rempath, $locpath, $mode);
 
 		if ($result === FALSE)
 		{
@@ -371,7 +371,7 @@ class CI_FTP {
 
 		$mode = ($mode === 'ascii') ? FTP_ASCII : FTP_BINARY;
 
-		$result = @ftp_get($this->conn_id, $locpath, $rempath, $mode);
+		$result = ftp_get($this->conn_id, $locpath, $rempath, $mode);
 
 		if ($result === FALSE)
 		{
@@ -403,7 +403,7 @@ class CI_FTP {
 			return FALSE;
 		}
 
-		$result = @ftp_rename($this->conn_id, $old_file, $new_file);
+		$result = ftp_rename($this->conn_id, $old_file, $new_file);
 
 		if ($result === FALSE)
 		{
@@ -447,7 +447,7 @@ class CI_FTP {
 			return FALSE;
 		}
 
-		$result = @ftp_delete($this->conn_id, $filepath);
+		$result = ftp_delete($this->conn_id, $filepath);
 
 		if ($result === FALSE)
 		{
@@ -488,14 +488,14 @@ class CI_FTP {
 			{
 				// If we can't delete the item it's probaly a directory,
 				// so we'll recursively call delete_dir()
-				if ( ! preg_match('#/\.\.?$#', $list[$i]) && ! @ftp_delete($this->conn_id, $list[$i]))
+				if ( ! preg_match('#/\.\.?$#', $list[$i]) && ! ftp_delete($this->conn_id, $list[$i]))
 				{
 					$this->delete_dir($list[$i]);
 				}
 			}
 		}
 
-		if (@ftp_rmdir($this->conn_id, $filepath) === FALSE)
+		if (ftp_rmdir($this->conn_id, $filepath) === FALSE)
 		{
 			if ($this->debug === TRUE)
 			{
@@ -524,7 +524,7 @@ class CI_FTP {
 			return FALSE;
 		}
 
-		if (@ftp_chmod($this->conn_id, $perm, $path) === FALSE)
+		if (ftp_chmod($this->conn_id, $perm, $path) === FALSE)
 		{
 			if ($this->debug === TRUE)
 			{
@@ -574,7 +574,7 @@ class CI_FTP {
 		}
 
 		// Open the local file path
-		if ($fp = @opendir($locpath))
+		if ($fp = opendir($locpath))
 		{
 			// Attempt to open the remote file path and try to create it, if it doesn't exist
 			if ( ! $this->changedir($rempath, TRUE) && ( ! $this->mkdir($rempath) OR ! $this->changedir($rempath)))
@@ -645,7 +645,7 @@ class CI_FTP {
 	public function close()
 	{
 		return $this->_is_conn()
-			? @ftp_close($this->conn_id)
+			? ftp_close($this->conn_id)
 			: FALSE;
 	}
 

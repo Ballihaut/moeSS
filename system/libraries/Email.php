@@ -1568,7 +1568,7 @@ class CI_Email {
 			}
 			elseif (ICONV_ENABLED === TRUE)
 			{
-				$output = @iconv_mime_encode('', $str,
+				$output = iconv_mime_encode('', $str,
 					array(
 						'scheme' => 'Q',
 						'line-length' => 76,
@@ -1824,7 +1824,7 @@ class CI_Email {
 	{
 		// is popen() enabled?
 		if ( ! function_usable('popen')
-			OR FALSE === ($fp = @popen(
+			OR FALSE === ($fp = popen(
 						$this->mailpath.' -oi -f '.$this->clean_email($this->_headers['From'])
 							.' -t -r '.$this->clean_email($this->_headers['Return-Path'])
 						, 'w'))
